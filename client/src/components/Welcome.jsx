@@ -4,4 +4,4 @@ const Welcome = () => {
     );
 }
 
-export const Welcome;
+export default Welcome;

@@ -4,4 +4,4 @@ const Transactions = () => {
     );
 }
 
-export const Transactions;
+export default Transactions;
