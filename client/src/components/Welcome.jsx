@@ -29,7 +29,8 @@ const Welcome = () => {
             <AiFillPlayCircle className="text-white mr-2" />
             <p className="text-white text-base font-semibold">Connect Wallet</p>
           </button>
-            
+
+          {/* grid containing the features */}
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
             <div className={`rounded-tl-2xl ${companyCommonStyles}`}>
               Reliability
@@ -46,6 +47,11 @@ const Welcome = () => {
               Blockchain
             </div>
           </div>
+        </div>
+
+        {/* Card element */}
+        <div>
+
         </div>
       </div>
     </div>
