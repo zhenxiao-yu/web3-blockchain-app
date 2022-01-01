@@ -9,14 +9,16 @@ const NavBarItem = ({ title, classprops }) => (
 );
 
 const Navbar = () => {
-  // control
+  // controls mo bile toggle nav bar state
   const [toggleMenu, setToggleMenu] = React.useState(false);
 
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
+      {/* logo */}
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
         <img src={logo} alt="logo" className="w-32 cursor-pointer" />
       </div>
+      {/* navigation bar item + login button */}
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
           <NavBarItem key={item + index} title={item} />
@@ -25,6 +27,8 @@ const Navbar = () => {
           Login
         </li>
       </ul>
+
+      {/* open toggled menu */}
       <div className="flex relative">
         {!toggleMenu && (
           <HiMenuAlt4
@@ -33,6 +37,7 @@ const Navbar = () => {
             onClick={() => setToggleMenu(true)}
           />
         )}
+        {/* close toggled menu */}
         {toggleMenu && (
           <AiOutlineClose
             fontSize={28}
