@@ -5,6 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { TransactionContext } from "../context/TransactionContext";
 import { Loader } from "./";
+import { shortenAddress } from "../utils/shortenAddress";
 
 const companyCommonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -24,7 +25,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 const Welcome = () => {
   const {
     connectWallet, // connect Wallet function
-    currentAccount,  //currentAccount variable,
+    currentAccount, //currentAccount variable,
     formData, // formData
     sendTransaction, // sendTransaction function
     handleChange, // handleChange function
@@ -98,7 +99,9 @@ const Welcome = () => {
               </div>
               <div>
                 {/* address of currently connected account */}
-                <p className="text-white font-light text-sm">{currentAccount}</p>
+                <p className="text-white font-light text-sm">
+                  {shortenAddress(currentAccount)}
+                </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
                 </p>
