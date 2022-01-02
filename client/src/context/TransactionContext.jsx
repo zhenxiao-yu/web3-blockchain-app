@@ -78,10 +78,15 @@ export const TransactionsProvider = ({ children }) => {
     }
   };
 
+  //send transaction method
   const sendTransaction = async () => {
     try {
       // check for metamask existence
       if (!ethereum) return alert("Please install MetaMask first");
+
+      //destructure formData
+      const { addressTo, amount, keyword, message } = formData;
+      getEthereumContract()
     } catch (error) {
       console.log(error);
 
@@ -102,7 +107,7 @@ export const TransactionsProvider = ({ children }) => {
         formData,
         setFormData,
         handleChange,
-        sendTransaction
+        sendTransaction,
       }}
     >
       {children}

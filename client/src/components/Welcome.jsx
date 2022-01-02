@@ -31,7 +31,7 @@ const Welcome = () => {
   } = useContext(TransactionContext);
 
   // console.log(value); //test
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     //destructure formData
     const { addressTo, amount, keyword, message } = formData;
     e.preventDefault(); //prevent page from reloading
@@ -135,7 +135,7 @@ const Welcome = () => {
             {/* Division line */}
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {true ? (
+            {false ? (
               <Loader />
             ) : (
               <button
