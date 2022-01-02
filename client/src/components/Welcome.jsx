@@ -31,7 +31,7 @@ const Welcome = () => {
   } = useContext(TransactionContext);
 
   // console.log(value); //test
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     //destructure formData
     const { addressTo, amount, keyword, message } = formData;
     e.preventDefault(); //prevent page from reloading

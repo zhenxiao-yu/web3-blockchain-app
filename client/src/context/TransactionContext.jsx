@@ -39,6 +39,9 @@ export const TransactionsProvider = ({ children }) => {
     keyword: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  // store transactionCount in local storage
+  const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
 
   //handle input (form) change
   const handleChange = (e, name) => {
@@ -91,20 +94,39 @@ export const TransactionsProvider = ({ children }) => {
       const { addressTo, amount, keyword, message } = formData;
       // store contract in variable
       const transactionContract = getEthereumContract();
+      //convert from amount to unit into Gwei
+      const parsedAmount = ethers.utils.parseEther(amount);
 
       await ethereum.request({
-          method: 'eth_sendTransaction', 
-          params: [{
-              from: currentAccount,
-              to: addressTo,
-              gas: '2BF20', // 180000 gwei == 0.00018 ether
-              value: amount, 
+        method: "eth_sendTransaction",
+        params: [
+          {
+            from: currentAccount,
+            to: addressTo,
+            gas: "2BF20", // 180000 gwei == 0.00018 ether
+            value: parsedAmount._hex, //0.00001
+          },
+        ],
+      });
 
-          }]
-      })
+      // await for transaction to be added to the blockchain
+      const transactionHash = await transactionContract.addToBlockchain(
+        addressTo,
+        parsedAmount,
+        message,
+        keyword
+      );
+
+      setIsLoading(true); //start loading
+      console.log(`Loading - ${transactionHash.hash}`);
+      await transactionHash.wait(); //wait for transaction to finish
+      setIsLoading(false); //finish loading
+      console.log(`Success - ${transactionHash.hash}`);
+      //get total number of transactions
+      const transactionCount = await transactionContract.getTransactionCount();
+      setTransactionCount(transactionCount.toNumber());
     } catch (error) {
       console.log(error);
-
       throw new Error("No ethereum object");
     }
   };
