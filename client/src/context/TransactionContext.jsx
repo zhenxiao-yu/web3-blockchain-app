@@ -21,11 +21,14 @@ const getEthereumContract = () => {
     signer
   );
 
-  console.log({
-    provider,
-    signer,
-    transactionContract,
-  });
+  //   test
+  //   console.log({
+  //     provider,
+  //     signer,
+  //     transactionContract,
+  //   });
+
+  return transactionContract;
 };
 
 export const TransactionsProvider = ({ children }) => {
@@ -86,7 +89,19 @@ export const TransactionsProvider = ({ children }) => {
 
       //destructure formData
       const { addressTo, amount, keyword, message } = formData;
-      getEthereumContract()
+      // store contract in variable
+      const transactionContract = getEthereumContract();
+
+      await ethereum.request({
+          method: 'eth_sendTransaction', 
+          params: [{
+              from: currentAccount,
+              to: addressTo,
+              gas: '2BF20', // 180000 gwei == 0.00018 ether
+              value: amount, 
+
+          }]
+      })
     } catch (error) {
       console.log(error);
 
