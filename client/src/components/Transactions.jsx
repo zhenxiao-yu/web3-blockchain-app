@@ -27,10 +27,10 @@ const TransactionsCard = ({
         min-w-full
         flex-col p-3 rounded-md hover:shadow-2xl"
     >
-      {/* Conetent */}
+      {/* Content */}
       <div className="flex flex-col items-center w-full mt-3">
-        {/* Address from */}
         <div className="display-flex justify-start w-full mb-6 p-2">
+          {/* Address from */}
           <a
             href={`https://ropsten.etherscan.io/address/${addressFrom}`}
             target="_blank"
@@ -40,6 +40,7 @@ const TransactionsCard = ({
               From: {shortenAddress(addressFrom)}
             </p>
           </a>
+          {/* Address to */}
           <a
             href={`https://ropsten.etherscan.io/address/${addressTo}`}
             target="_blank"
@@ -49,6 +50,7 @@ const TransactionsCard = ({
               To: {shortenAddress(addressTo)}
             </p>
           </a>
+          {/* Amount to */}
           <p className="text-white text-base">Amount: {amount} ETH</p>
           {message && (
             <>
