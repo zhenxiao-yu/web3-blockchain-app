@@ -29,7 +29,7 @@ const Welcome = () => {
     formData, // formData
     sendTransaction, // sendTransaction function
     handleChange, // handleChange function
-    isLoading //isLoading variable
+    isLoading, //isLoading variable
   } = useContext(TransactionContext);
 
   // console.log(value); //test
@@ -101,7 +101,7 @@ const Welcome = () => {
               <div>
                 {/* address of currently connected account */}
                 <p className="text-white font-light text-sm">
-                  {currentAccount}
+                {shortenAddress(currentAccount)}
                 </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
