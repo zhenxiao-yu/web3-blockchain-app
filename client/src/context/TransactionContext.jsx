@@ -44,6 +44,7 @@ export const TransactionsProvider = ({ children }) => {
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount")
   );
+  const [transactions, setTransactions] = useState([]);
 
   //handle input (form) change
   const handleChange = (e, name) => {
@@ -54,11 +55,12 @@ export const TransactionsProvider = ({ children }) => {
   const getAllTransactions = async () => {
     try {
       if (ethereum) {
+        // get contract
         const transactionsContract = createEthereumContract();
 
         const availableTransactions =
           await transactionsContract.getAllTransactions();
-
+        // new structure for transactions
         const structuredTransactions = availableTransactions.map(
           (transaction) => ({
             addressTo: transaction.receiver,
@@ -93,7 +95,7 @@ export const TransactionsProvider = ({ children }) => {
       if (accounts.length) {
         //set current account as the first account in array
         setCurrentAccount(accounts[0]);
-        // getAllTransactions();
+        getAllTransactions();
       } else {
         console.log("No accounts detected");
       }
@@ -201,6 +203,8 @@ export const TransactionsProvider = ({ children }) => {
         setFormData,
         handleChange,
         sendTransaction,
+        transactions,
+        isLoading
       }}
     >
       {children}

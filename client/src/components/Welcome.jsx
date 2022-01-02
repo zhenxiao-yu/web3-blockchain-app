@@ -29,6 +29,7 @@ const Welcome = () => {
     formData, // formData
     sendTransaction, // sendTransaction function
     handleChange, // handleChange function
+    isLoading //isLoading variable
   } = useContext(TransactionContext);
 
   // console.log(value); //test
@@ -138,7 +139,7 @@ const Welcome = () => {
             {/* Division line */}
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {false ? (
+            {isLoading ? (
               <Loader />
             ) : (
               <button
