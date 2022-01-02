@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
@@ -22,11 +22,24 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 );
 
 const Welcome = () => {
-  // connect Wallet function
-  const { connectWallet } = useContext(TransactionContext);
+  const {
+    connectWallet, // connect Wallet function
+    currentAccount,  //currentAccount variable,
+    formData, // formData
+    sendTransaction, // sendTransaction function
+    handleChange, // handleChange function
+  } = useContext(TransactionContext);
 
   // console.log(value); //test
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    //destructure formData
+    const { addressTo, amount, keyword, message } = formData;
+    e.preventDefault(); //prevent page from reloading
+    // not empty inputs check
+    if (!addressTo || !amount || !keyword || !message) return;
+    sendTransaction();
+  };
+
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
@@ -40,14 +53,18 @@ const Welcome = () => {
             Explore the crypto world. Buy and sell cryptocurrencies easily.
           </p>
           {/* Connect to wallet button */}
-          <button
-            type="button"
-            onClick={connectWallet}
-            className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
-          >
-            <AiFillPlayCircle className="text-white mr-2" />
-            <p className="text-white text-base font-semibold">Connect Wallet</p>
-          </button>
+          {!currentAccount && (
+            <button
+              type="button"
+              onClick={connectWallet}
+              className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+            >
+              <AiFillPlayCircle className="text-white mr-2" />
+              <p className="text-white text-base font-semibold">
+                Connect Wallet
+              </p>
+            </button>
+          )}
 
           {/* Grid containing the features */}
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
@@ -95,25 +112,25 @@ const Welcome = () => {
               placeholder="Address To"
               name="addressTo"
               type="text"
-              handleChange={() => {}}
+              handleChange={handleChange}
             />
             <Input
               placeholder="Amount (ETH)"
               name="amount"
               type="number"
-              handleChange={() => {}}
+              handleChange={handleChange}
             />
             <Input
               placeholder="Keyword (Gif)"
               name="keyword"
               type="text"
-              handleChange={() => {}}
+              handleChange={handleChange}
             />
             <Input
               placeholder="Enter Message"
               name="message"
               type="text"
-              handleChange={() => {}}
+              handleChange={handleChange}
             />
             {/* Division line */}
             <div className="h-[1px] w-full bg-gray-400 my-2" />
