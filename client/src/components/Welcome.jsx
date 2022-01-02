@@ -98,7 +98,7 @@ const Welcome = () => {
               </div>
               <div>
                 {/* address of currently connected account */}
-                <p className="text-white font-light text-sm">028d...12212</p>
+                <p className="text-white font-light text-sm">{currentAccount}</p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
                 </p>
